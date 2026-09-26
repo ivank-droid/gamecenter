@@ -1,0 +1,24 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build with Buildozer
+        uses: ArtemShtepenko/kivy-buildozer-action@v1.2
+        with:
+          command: buildozer android debug
+          subfolder: .
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gamecenter-apk
+          path: bin/*.apk
