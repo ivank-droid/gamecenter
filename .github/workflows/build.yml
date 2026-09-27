@@ -23,6 +23,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install "cython<0.29.37" buildozer
 
+      - name: Clean previous builds
+        run: |
+          rm -rf .buildozer
+
       - name: Build APK
         run: |
           yes | buildozer android debug
